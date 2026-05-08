@@ -14,8 +14,9 @@ deep_learning_reproduction/
 ├── config/          # 配置文件
 ├── data/            # 数据集（自动下载）
 ├── models/          # 模型定义
-│   ├── day1_mlp.py  # MLP模型（MNIST分类）
-│   └── day2_CNN.py  # CNN模型（CIFAR-10分类）
+│   ├── day1_mlp.py      # MLP模型（MNIST分类）
+│   ├── day2_CNN.py       # CNN模型（CIFAR-10分类）
+│   └── day3_Transformer.py # Transformer模型（CIFAR-10分类）
 ├── utils/           # 工具函数
 ├── train.py         # 训练脚本
 ├── requirements.txt # 依赖包
@@ -57,8 +58,9 @@ pip install -r requirements.txt
 |------------|------------------------|------------|--------------------------|
 | 2026-04-27 | 初始化项目结构         | 已完成     | 创建基本目录和文件结构   |
 | 2026-04-27 | 实现MLP模型（MNIST）   | 已完成     | 包含LinearModel和MLP     |
-| 2026-04-27 | 实现CNN模型（CIFAR-10） | 已完成     | 包含LeNet5、AlexNet、VGG16 |
+| 2026-04-27 | 实现CNN模型（CIFAR-10） | 已完成     | 包含LeNet5、AlexNet、VGG16、ResNet18 |
 | 2026-04-27 | 编写README文件         | 已完成     | 包含项目介绍和使用说明   |
+| 2026-05-08 | 实现Transformer模型    | 已完成     | 包含完整的Vision Transformer架构 |
 | 2026-04-28 | 优化模型性能           | 待完成     | 调整超参数，提升准确率   |
 | 2026-04-29 | 添加新模型             | 待完成     | 实现ResNet等高级模型     |
 | 2026-04-30 | 编写单元测试           | 待完成     | 确保代码质量和稳定性     |
@@ -77,9 +79,23 @@ pip install -r requirements.txt
 
 实现于 `models/day2_CNN.py`，用于CIFAR-10图像分类：
 
-- **LeNet5**：经典的LeNet-5模型
-- **AlexNet**：AlexNet模型（适配CIFAR-10）
-- **VGG16**：VGG16模型（适配CIFAR-10）
+- **LeNet5**：经典的LeNet-5模型，包含2个卷积层和3个全连接层
+- **AlexNet**：AlexNet模型（适配CIFAR-10），包含4个卷积层和Dropout
+- **VGG16**：VGG16模型（适配CIFAR-10），包含6个卷积层，使用小卷积核堆叠
+- **ResNet18**：残差网络模型，包含残差块和跳跃连接，解决梯度消失问题
+
+### 3. Transformer模型
+
+实现于 `models/day3_Transformer.py`，用于CIFAR-10图像分类：
+
+- **PositionalEncoding**：位置编码模块，使用正弦/余弦函数实现
+- **TransformerEncoderBlock**：Transformer编码器块，包含多头自注意力和前馈网络
+- **FullTransformer**：完整的Vision Transformer模型，包含Patch嵌入、位置编码和多层Transformer编码器
+
+**模型特点：**
+- 采用Patch嵌入将图像转换为序列
+- 使用多头自注意力机制捕捉全局依赖
+- 包含详细的张量形状和统计信息打印，便于学习和调试
 
 ## 使用方法
 
@@ -93,6 +109,12 @@ python models/day1_mlp.py
 
 ```bash
 python models/day2_CNN.py
+```
+
+### 运行Transformer模型
+
+```bash
+python models/day3_Transformer.py
 ```
 
 ### 自定义训练
